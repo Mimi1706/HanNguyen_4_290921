@@ -49,7 +49,6 @@ function checkInputEmail(checkedEmail,errorMsg)
 //Fonction de controle de check des villes
 function checkCity(checkedCity,errorMsg) {
   let isCityChecked = false;
-  console.log('Entrée dans le for');
   console.log(checkedCity);
   for (let i=0; i<checkedCity.length ;i++) 
   { console.log(checkedCity[i]);
@@ -126,7 +125,7 @@ $registrationForm.addEventListener('submit', function(event) {
     // puis on remet les champs de saisie a vide
     $registrationForm.reset();
   } else {
-    alert('erreur');
+    
   }
   return true;
 })
