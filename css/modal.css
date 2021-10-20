@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Landing Page */
 
 body {
@@ -74,6 +78,7 @@ img {
 @media screen and (max-width: 1000px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
+    background-color: transparent;
     position: absolute;
     right: 0;
     top: 0;
@@ -88,6 +93,7 @@ img {
  @media screen and (max-width: 700px) {
   .topnav a {display: none;}
   .topnav a.icon {
+    background-color: white;
     float: right;
     display: block;
     margin-top: -15px;
@@ -156,7 +162,7 @@ main {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(26, 39, 156, 0.4);
+  background-color: white;
 }
 
 .content {
@@ -191,6 +197,7 @@ input {
   outline: none;
 }
 .text-control {
+  background-color: white;
   margin: 0;
   padding: 8px;
   width: 100%;
@@ -198,9 +205,10 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.2em;
   color: #e54858;
   display: block;
   margin-top: 7px;
@@ -210,18 +218,20 @@ input {
   opacity: 0;
   transition: 0.3s;
 }
+
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
+
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
+
+.formData span {
+  color: red;
+  font-size: 13px;
+}
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -286,6 +296,13 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
+
+#checkbox1{
+  display:block;
+  margin-top: 10px;
+  margin-bottom:0px;
+}
+
 .close {
   position: absolute;
   right: 15px;
@@ -469,8 +486,15 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+
+/* Thank you window */
+
+
 @media screen and (max-width: 700px) {
 
+  .topnav{
+    z-index: 1000;
+  }
   .header-logo {
     margin-left:10px;
     margin-top: 15px;
@@ -512,7 +536,7 @@ footer {
   }
   .hero-text {
     width: unset;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin:20px 0;
   }
   .hero-img img {
@@ -538,6 +562,18 @@ footer {
     text-align: center;
     font-size: 0.6em;
   }
+
+  .bground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: white;
+  }
+  .modal-body {
+    padding: 35px 8%;
+    margin: 15px auto;
+  }
 }
 
 @media screen and (min-width: 701px) and (max-width: 1000px){
@@ -558,13 +594,13 @@ footer {
   .hero-img img {
     width: 100%;
     height: 100%;
+    box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.2);
   }
   .fa-bars{
     color: #232323;
   }
   .hero-section {
     height: 45em;
-    box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
     display: block;
     box-shadow: unset;
     margin: 0;
@@ -629,3 +665,112 @@ footer {
   }
 }
 
+.toast {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  justify-content: start;
+  width: 375px;
+  height: 120px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slide-in .5s ease-out forwards;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.before {
+  width: 5px;
+  height: 100px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #a2de96;
+}
+
+.toast-icon {
+  align-items: center;
+  background: #79d70f;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  margin-left: 30px;
+  width: 35px;
+}
+
+.text {
+  width: 220px;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: start;
+  margin-left: 30px;
+}
+
+.text > * {
+  margin: 0;
+  width: 400px;
+}
+
+.toast-text:first-child {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.message {
+  margin-top: 1px;
+  font-size: .8em;
+  color: black;
+}
+
+.close {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  user-select: none;
+  transform: translate(10px, -5px);
+  font-size: 2.5em;
+  color: #dddddd;
+  cursor: pointer;
+}
+
+@keyframes toast {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+}
+
+.toast-area {
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.toast-area > * {
+  margin-top: 1em;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
