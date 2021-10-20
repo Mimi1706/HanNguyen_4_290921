@@ -180,8 +180,14 @@ main {
 }
 
 .modal-body {
+  font-family: var(--font-default);
+  font-weight: bolder;
   padding: 15px 8%;
   margin: 15px auto;
+}
+
+.modal-body label{
+  margin-top:10px;
 }
 
 label {
@@ -189,7 +195,6 @@ label {
   font-size: 17px;
   font-weight: normal;
   display: inline-block;
-  margin-bottom: 11px;
 }
 input {
   padding: 8px;
@@ -204,6 +209,7 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
+  margin-top:10px;
 }
 
 .formData[data-error]::after {
@@ -303,6 +309,10 @@ input {
   margin-bottom:0px;
 }
 
+#termsAndConditions{
+  margin-top:20px;
+}
+
 .close {
   position: absolute;
   right: 15px;
@@ -339,6 +349,7 @@ input {
   color: #fff;
   cursor: pointer;
   border: 0;
+  margin-top:20px;
 }
 /* custom select styles */
 .custom-select {
@@ -573,7 +584,6 @@ footer {
   .modal-body {
     padding: 35px 8%;
     margin: 15px auto;
-    font-family: "DM Sans";
   }
 }
 
