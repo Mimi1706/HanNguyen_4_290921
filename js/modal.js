@@ -57,10 +57,10 @@ function checkInputEmail(checkedEmail,errorMsg)
 
   if (validMail.test(checkedEmail)){
     errorMsg.classList.add('hidden');
+    return true;
   } else {
     errorMsg.classList.remove('hidden');
   }
-  return true;
 }
 
 //Fonction de controle de check des villes
@@ -79,62 +79,59 @@ function checkCity(checkedCity,errorMsg) {
 
 //Fonction de controle de check des conditions
 function checkCheckBox(checkedBox,errorMsg) {
-  let isBoxChecked = checkedBox.checked === false;
+  const isBoxChecked = checkedBox.checked === false;
   if (isBoxChecked) {
     errorMsg.classList.remove('hidden');
   } else {
     errorMsg.classList.add('hidden');
+    return true;
   }
-  return isBoxChecked;
 }
-
-/** On recupere le retour (true ou false) de toutes nos fonctions de controle dans la constante isFormValid */
-let isFormValid = () => {
-// debut d'une fonction de controle
-checkInputString( // appel a la fonction de controle du champs de saisie
-  document.getElementById('first').value, // parametre 1 l'input controlé
-  document.querySelector(".firstErrorMsg"), // déclaration de l'element html contenant le message d'erreur associé
-)
-
-checkInputString(
-  document.getElementById('last').value, 
-  document.querySelector(".lastErrorMsg"),
-)
-
-checkInputEmail(
-  document.getElementById('email').value, 
-  document.querySelector(".emailErrorMsg"),
-)
-
-checkInputNumber(
-  document.getElementById('birthdate').value,
-  document.querySelector(".ageErrorMsg"),
-)
-
-checkInputNumber(
-  document.getElementById('quantity').value, 
-  document.querySelector(".tournamentErrorMsg"),
-)
-
-checkCity(
-  document.querySelectorAll('#city-checkbox .checkbox-input'),
-  document.querySelector(".tournamentCityErrorMsg")
-)
-
-checkCheckBox(
-  document.getElementById('acceptConditions'),
-  document.querySelector(".termsCheckMsg"),
-)
-// fin
-};
 
 /**  au clic de soumission du formulaire */
 $registrationForm.addEventListener('submit', function(event) {
   event.preventDefault()
 // si tous les appels aux fonction de controle retourne true
-  if (isFormValid()) {
+  if (
+
+    checkInputString( 
+      document.getElementById('first').value, 
+      document.querySelector(".firstErrorMsg"),
+    )
+    &&
+    checkInputString(
+      document.getElementById('last').value, 
+      document.querySelector(".lastErrorMsg"),
+    )
+    &&
+    checkInputEmail(
+      document.getElementById('email').value, 
+      document.querySelector(".emailErrorMsg"),
+    )
+    &&
+    checkInputNumber(
+      document.getElementById('birthdate').value,
+      document.querySelector(".ageErrorMsg"),
+    )
+    &&
+    checkInputNumber(
+      document.getElementById('quantity').value, 
+      document.querySelector(".tournamentErrorMsg"),
+    )
+    &&
+    checkCity(
+      document.querySelectorAll('#city-checkbox .checkbox-input'),
+      document.querySelector(".tournamentCityErrorMsg")
+    )
+    &&
+    checkCheckBox(
+      document.getElementById('acceptConditions'),
+      document.querySelector(".termsCheckMsg"),
+    )
+
+  ) {
     // on ferme la modale
-    modalDisplay('none');
+    modalDisplay2('none');
     // et on ouvre celle de confirmation
     showNotificationToast()
     // puis on remet les champs de saisie a vide
