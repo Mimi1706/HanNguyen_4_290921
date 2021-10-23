@@ -8,6 +8,23 @@ const $registrationForm = document.querySelector('.registration-form');
 // Fonction pour ouvrir et fermer la modal
 function modalDisplay(displayStyle) {
   modal.style.display = displayStyle 
+  unloadScrollBars();
+}
+
+function modalDisplay2(displayStyle) {
+  modal.style.display = displayStyle 
+  reloadScrollBars();
+}
+
+// Fonction pour cacher la barre de scroll
+function reloadScrollBars() {
+  document.body.style.overflow = 'auto';  // firefox, chrome
+  document.body.scroll = "yes"; // ie only
+}
+
+function unloadScrollBars() {
+  document.body.style.overflow = 'hidden';  // firefox, chrome
+  document.body.scroll = "no"; // ie only
 }
 
 // Fonction de controle de la longueur des champs de saisie nom et prenom variabilisé
@@ -49,9 +66,7 @@ function checkInputEmail(checkedEmail,errorMsg)
 //Fonction de controle de check des villes
 function checkCity(checkedCity,errorMsg) {
   let isCityChecked = false;
-  console.log(checkedCity);
-  for (let i=0; i<checkedCity.length ;i++) 
-  { console.log(checkedCity[i]);
+  for (let i=0; i<checkedCity.length ;i++) { 
     if (checkedCity[i].checked) {
     isCityChecked = true;
     errorMsg.classList.add('hidden');
@@ -64,48 +79,48 @@ function checkCity(checkedCity,errorMsg) {
 
 //Fonction de controle de check des conditions
 function checkCheckBox(checkedBox,errorMsg) {
-  const isBoxChecked = checkedBox.checked === false;
+  let isBoxChecked = checkedBox.checked === false;
   if (isBoxChecked) {
     errorMsg.classList.remove('hidden');
   } else {
     errorMsg.classList.add('hidden');
   }
-  return true;
+  return isBoxChecked;
 }
 
 /** On recupere le retour (true ou false) de toutes nos fonctions de controle dans la constante isFormValid */
-const isFormValid = () => {
+let isFormValid = () => {
 // debut d'une fonction de controle
 checkInputString( // appel a la fonction de controle du champs de saisie
   document.getElementById('first').value, // parametre 1 l'input controlé
   document.querySelector(".firstErrorMsg"), // déclaration de l'element html contenant le message d'erreur associé
 )
-&&
+
 checkInputString(
   document.getElementById('last').value, 
   document.querySelector(".lastErrorMsg"),
 )
-&&
+
 checkInputEmail(
   document.getElementById('email').value, 
   document.querySelector(".emailErrorMsg"),
 )
-&&
+
 checkInputNumber(
   document.getElementById('birthdate').value,
   document.querySelector(".ageErrorMsg"),
 )
-&&
+
 checkInputNumber(
   document.getElementById('quantity').value, 
   document.querySelector(".tournamentErrorMsg"),
 )
-&&
+
 checkCity(
   document.querySelectorAll('#city-checkbox .checkbox-input'),
   document.querySelector(".tournamentCityErrorMsg")
 )
-&&
+
 checkCheckBox(
   document.getElementById('acceptConditions'),
   document.querySelector(".termsCheckMsg"),
@@ -124,9 +139,9 @@ $registrationForm.addEventListener('submit', function(event) {
     showNotificationToast()
     // puis on remet les champs de saisie a vide
     $registrationForm.reset();
-  } else {
-    
-  }
+  } 
   return true;
 })
+
+
 
