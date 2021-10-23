@@ -9,11 +9,15 @@ const $registrationForm = document.querySelector('.registration-form');
 function modalDisplay(displayStyle) {
   modal.style.display = displayStyle 
   unloadScrollBars();
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 function modalDisplay2(displayStyle) {
   modal.style.display = displayStyle 
   reloadScrollBars();
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 // Fonction pour cacher la barre de scroll
