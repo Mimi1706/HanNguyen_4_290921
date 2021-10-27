@@ -23,12 +23,12 @@ function modalDisplay2(displayStyle) {
 // Fonction pour cacher la barre de scroll
 function reloadScrollBars() {
   document.body.style.overflow = 'auto';  // firefox, chrome
-  document.body.scroll = "yes"; // ie only
+  document.body.scroll = "yes"; // ie 
 }
 
 function unloadScrollBars() {
   document.body.style.overflow = 'hidden';  // firefox, chrome
-  document.body.scroll = "no"; // ie only
+  document.body.scroll = "no"; // ie 
 }
 
 // Fonction de controle de la longueur des champs de saisie nom et prenom variabilisé

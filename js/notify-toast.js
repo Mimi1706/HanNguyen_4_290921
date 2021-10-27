@@ -1,13 +1,12 @@
 
-/** Toggle the notification toast */
+/** Affichage du message de validation */
 function showNotificationToast() {
-    // Get the notification area
     const child = document.querySelector('#clonemother');
-    // Clone the child node
+    // Clone l'élément node 
     const clone = child.cloneNode(true);
-    // Push the node 
+    // Push the node
     const node = document.querySelector("#toasts").appendChild(clone);
-    // Define the timer for displaying the notification toast
+    // Définit le timer pour le message de validation
     setTimeout(() => {
             if (node) {
                 node.style.animation = "toast 2s ease-out forwards";
