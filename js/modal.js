@@ -31,109 +31,115 @@ function unloadScrollBars() {
   document.body.scroll = "no"; // ie 
 }
 
-// Fonction de controle de la longueur des champs de saisie nom et prenom variabilisé
-function checkInputString(inputVal,errorMsg) {
-  const isValueValid = inputVal.trim().length >= 2;
-  const letters = /^[A-Za-z]+$/;
-  if (isValueValid && inputVal.match(letters)) {
-    errorMsg.classList.add('hidden');
+// Fonction de controle de la longueur des champs de saisie nom variabilisé
+function firstName() {
+  const firstName = document.getElementById('first').value;
+  const firstErrorMsg = document.querySelector('.firstErrorMsg');
+  const isValueValid = firstName.trim().length >= 2 && firstName.match(/^[A-Za-z]+$/);
+  if (isValueValid) {
+    firstErrorMsg.classList.add('hidden');
   } else {
-    errorMsg.classList.remove('hidden');
+    firstErrorMsg.classList.remove('hidden');
   }
   return isValueValid;
 }
 
-//Fonction de controle pour la longue du chiffre de participation aux tournois
-function checkInputNumber(inputVal,errorMsg) {
-  const isValueValid = inputVal.trim().length >= 1;
+// Fonction de controle de la longueur des champs de saisie nom et prenom variabilisé
+function lastName() {
+  const lastName = document.getElementById('last').value;
+  const lastErrorMsg = document.querySelector('.lastErrorMsg');
+  const isValueValid = lastName.trim().length >= 2 && lastName.match(/^[A-Za-z]+$/);
   if (isValueValid) {
-    errorMsg.classList.add('hidden');
+    lastErrorMsg.classList.add('hidden');
   } else {
-    errorMsg.classList.remove('hidden');
+    lastErrorMsg.classList.remove('hidden');
   }
   return isValueValid;
 }
 
 //Fonction de controle pour valider une adresse mail
-function checkInputEmail(checkedEmail,errorMsg) 
-{
+function checkEmail() {
+  const email = document.getElementById('email').value;
+  const emailErrorMsg = document.querySelector('.emailErrorMsg');
   const validMail = /\S+@\S+\.\S+/;
 
-  if (validMail.test(checkedEmail)){
-    errorMsg.classList.add('hidden');
-    return true;
+  if (validMail.test(email)){
+    emailErrorMsg.classList.add('hidden');
+    return true
   } else {
-    errorMsg.classList.remove('hidden');
+    emailErrorMsg.classList.remove('hidden');
   }
+  return true;
+}
+
+//Fonction de controle pour la date de naissance
+function checkBirthdate() {
+  const birthate = document.getElementById('birthdate').value;
+  const ageErrorMsg = document.querySelector('.ageErrorMsg');
+  const isValueValid = birthate.trim().length >= 8;
+  if (isValueValid) {
+    ageErrorMsg.classList.add('hidden');
+  } else {
+    ageErrorMsg.classList.remove('hidden');
+  }
+  return isValueValid;
+}
+
+//Fonction de controle pour la longueur du chiffre de participation aux tournois
+function checkTournament() {
+  const quantity = document.getElementById('quantity').value;
+  const tournamentErrorMsg = document.querySelector('.tournamentErrorMsg');
+  const isValueValid = quantity.trim().length >= 1;
+  if (isValueValid) {
+    tournamentErrorMsg.classList.add('hidden');
+  } else {
+    tournamentErrorMsg.classList.remove('hidden');
+  }
+  return isValueValid;
 }
 
 //Fonction de controle de check des villes
-function checkCity(checkedCity,errorMsg) {
-  let isCityChecked = false;
-  for (let i=0; i<checkedCity.length ;i++) { 
-    if (checkedCity[i].checked) {
-    isCityChecked = true;
-    errorMsg.classList.add('hidden');
-    break;
+function checkCity() {
+  const cityCheckbox = document.querySelectorAll('#city-checkbox .checkbox-input');
+  const tournamentCityErrorMsg = document.querySelector('.tournamentCityErrorMsg');
+  for (let i=0; cityCheckbox[i]; i++) { 
+    if (cityCheckbox[i].checked>0) {
+    tournamentCityErrorMsg.classList.add('hidden');
+    return cityCheckbox;
   } else {
-    errorMsg.classList.remove('hidden');
-  }}
-  return isCityChecked;
+    tournamentCityErrorMsg.classList.remove('hidden');
+  }
+  }
 }
 
 //Fonction de controle de check des conditions
-function checkCheckBox(checkedBox,errorMsg) {
-  const isBoxChecked = checkedBox.checked === false;
+function checkCheckBox() {
+  const acceptConditions = document.getElementById('acceptConditions');
+  const termsCheckMsg = document.querySelector('.termsCheckMsg');
+  const isBoxChecked = acceptConditions.checked === false;
   if (isBoxChecked) {
-    errorMsg.classList.remove('hidden');
+    termsCheckMsg.classList.remove('hidden');
   } else {
-    errorMsg.classList.add('hidden');
-    return true;
+    termsCheckMsg.classList.add('hidden');
+    return !isBoxChecked;
   }
 }
 
 /**  au clic de soumission du formulaire */
 $registrationForm.addEventListener('submit', function(event) {
-  event.preventDefault()
+  event.preventDefault();
 // si tous les appels aux fonction de controle retourne true
-  if (
+  firstName();
+  lastName();
+  checkEmail();
+  checkBirthdate();
+  checkTournament();
+  checkCity();
+  checkCheckBox();
 
-    checkInputString( 
-      document.getElementById('first').value, 
-      document.querySelector(".firstErrorMsg"),
-    )
-    &&
-    checkInputString(
-      document.getElementById('last').value, 
-      document.querySelector(".lastErrorMsg"),
-    )
-    &&
-    checkInputEmail(
-      document.getElementById('email').value, 
-      document.querySelector(".emailErrorMsg"),
-    )
-    &&
-    checkInputNumber(
-      document.getElementById('birthdate').value,
-      document.querySelector(".ageErrorMsg"),
-    )
-    &&
-    checkInputNumber(
-      document.getElementById('quantity').value, 
-      document.querySelector(".tournamentErrorMsg"),
-    )
-    &&
-    checkCity(
-      document.querySelectorAll('#city-checkbox .checkbox-input'),
-      document.querySelector(".tournamentCityErrorMsg")
-    )
-    &&
-    checkCheckBox(
-      document.getElementById('acceptConditions'),
-      document.querySelector(".termsCheckMsg"),
-    )
+  const isFormValid = () => firstName() && lastName() && checkEmail() && checkBirthdate() && checkTournament() && checkCity() && checkCheckBox();
 
-  ) {
+  if (isFormValid()) {
     // on ferme la modale
     modalDisplay2('none');
     // et on ouvre celle de confirmation
@@ -141,8 +147,9 @@ $registrationForm.addEventListener('submit', function(event) {
     // puis on remet les champs de saisie a vide
     $registrationForm.reset();
   } 
-  return true;
+
 })
+
 
 
 
