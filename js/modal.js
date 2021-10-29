@@ -65,11 +65,11 @@ function checkEmail() {
 
   if (validMail.test(email)){
     emailErrorMsg.classList.add('hidden');
-    return true
+    return true;
   } else {
     emailErrorMsg.classList.remove('hidden');
+    return false;
   }
-  return true;
 }
 
 //Fonction de controle pour la date de naissance
