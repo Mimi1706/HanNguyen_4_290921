@@ -5,7 +5,7 @@ const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById('modal');
 const $registrationForm = document.querySelector('.registration-form');
 
-// Fonction pour ouvrir et fermer la modal
+// Fonction pour ouvrir la modal
 function modalDisplay(displayStyle) {
   modal.style.display = displayStyle 
   unloadScrollBars();
@@ -13,7 +13,8 @@ function modalDisplay(displayStyle) {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-function modalDisplay2(displayStyle) {
+// Fonction pour fermer la modal avec la croix
+function closeModal(displayStyle) {
   modal.style.display = displayStyle 
   reloadScrollBars();
   document.body.scrollTop = 0; // For Safari
@@ -31,7 +32,7 @@ function unloadScrollBars() {
   document.body.scroll = "no"; // ie 
 }
 
-// Fonction de controle de la longueur des champs de saisie nom variabilisé
+// Fonction de controle de la longueur du champ de saisie prénom 
 function firstName() {
   const firstName = document.getElementById('first').value;
   const firstErrorMsg = document.querySelector('.firstErrorMsg');
@@ -44,7 +45,7 @@ function firstName() {
   return isValueValid;
 }
 
-// Fonction de controle de la longueur des champs de saisie nom et prenom variabilisé
+// Fonction de controle de la longueur du champ de saisie nom 
 function lastName() {
   const lastName = document.getElementById('last').value;
   const lastErrorMsg = document.querySelector('.lastErrorMsg');
@@ -141,7 +142,7 @@ $registrationForm.addEventListener('submit', function(event) {
 
   if (isFormValid()) {
     // on ferme la modale
-    modalDisplay2('none');
+    closeModal('none');
     // et on ouvre celle de confirmation
     showNotificationToast()
     // puis on remet les champs de saisie a vide
