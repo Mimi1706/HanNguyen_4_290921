@@ -74,7 +74,7 @@
                         </div>
                         <div class="formData">
                             <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                            <input type="number" class="text-control" id="quantity" name="quantity" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" min="0" max="99">
+                            <input type="number" class="text-control" id="quantity" name="quantity"  min="0" max="99">
                             <span class="hidden tournamentErrorMsg">Veuillez indiquer le nombre de tournois GameOn auquel vous avez participé.</span>
                         </div>
                         
@@ -179,28 +179,19 @@
                         <input id="submit-button" class="btn-submit" type="submit" value="C'est parti" />
                     </form>
                 </div>
+              <!-- DEBUT FENETRE CONFIRMATION ENVOI -->
+              <div class="confirm-bground" id="confirmation-message">
+                <span onclick="closeModal('none')" class="close"></span>
+                <div class="confirmation">
+                  <p>Merci de votre inscription !</p>
+                  <button class="confirmed-button" onclick="closeModal('none')">Fermer</button>
+                </div>
+              </div>
+              <!-- FIN FENETRE CONFIRMATION ENVOI -->
             </div>
         </div>
         <!-- FIN FENETRE FORMULAIRE -->
     </main>
-    <!-- DEBUT FENETRE CONFIRMATION ENVOI -->
-    <div class="toast-area" id="toasts">
-        <div style="display: none;">
-            <div class="toast" id="clonemother">
-                <div class="toast-content">
-                    <div class="before"></div>
-                    <div class="toast-icon">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="text">
-                        <p class="toast-text">Félicitations !</p>
-                        <p class="message">Votre demande d'inscription a bien été prise en compte.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FIN FENETRE CONFIRMATION ENVOI -->
     <footer>
         <p class="copyrights">
             Copyright 2014 - 2020, GameOn Inc.
@@ -208,7 +199,6 @@
     </footer>
     <script src="js/modal.js"></script>
     <script src="js/nav.js"></script>
-    <script src="js/notify-toast.js"></script>
 </body>
 
 </html>

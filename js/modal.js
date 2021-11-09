@@ -3,11 +3,13 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById('modal');
+const confirmMessage = document.getElementById('confirmation-message')
 const $registrationForm = document.querySelector('.registration-form');
 
 // Fonction pour ouvrir la modal
 function modalDisplay(displayStyle) {
   modal.style.display = displayStyle 
+  openConfirmMessage('none');
   unloadScrollBars();
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -15,8 +17,17 @@ function modalDisplay(displayStyle) {
 
 // Fonction pour fermer la modal avec la croix
 function closeModal(displayStyle) {
+  openConfirmMessage('none');
   modal.style.display = displayStyle 
   reloadScrollBars();
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+// Fonction pour afficher le message de confirmation
+function openConfirmMessage(displayStyle) {
+  confirmMessage.style.display = displayStyle 
+  unloadScrollBars();
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
@@ -90,11 +101,11 @@ function checkBirthdate() {
 function checkTournament() {
   const quantity = document.getElementById('quantity').value;
   const tournamentErrorMsg = document.querySelector('.tournamentErrorMsg');
-  const isValueValid = quantity.trim().length >= 1;
+  const isValueValid = quantity.trim().length >= 1; 
   if (isValueValid) {
     tournamentErrorMsg.classList.add('hidden');
   } else {
-    tournamentErrorMsg.classList.remove('hidden');
+    tournamentErrorMsg.classList.remove('hidden'); 
   }
   return isValueValid;
 }
@@ -141,10 +152,8 @@ $registrationForm.addEventListener('submit', function(event) {
   const isFormValid = () => firstName() && lastName() && checkEmail() && checkBirthdate() && checkTournament() && checkCity() && checkCheckBox();
 
   if (isFormValid()) {
-    // on ferme la modale
-    closeModal('none');
-    // et on ouvre celle de confirmation
-    showNotificationToast()
+    // on ouvre le message de confirmation
+    openConfirmMessage('block');
     // puis on remet les champs de saisie a vide
     $registrationForm.reset();
   } 
