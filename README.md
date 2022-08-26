@@ -3,7 +3,7 @@
 # HanNguyen_4_290921
 **[Openclassrooms] Projet 4 - Créer une landing page avec Javascript**
 
-Dans le cadre de la [formation de Développeur Front-end](https://openclassrooms.com/fr/paths/314-developpeur-front-end) d'Openclassrooms, ce projet introduit au langage de programmation JavaScript, utilisé ici pour la création d'un formulaire. Tout est écrit en Javascript vanilla, aucun framework ou bibliothèque n'est utilisée. 
+Dans le cadre de la [formation de Développeur Front-end](https://openclassrooms.com/fr/paths/314-developpeur-front-end) d'Openclassrooms, ce projet introduit au langage de programmation JavaScript, utilisé ici pour la création d'un formulaire. Tout étant écrit en Javascript vanilla, aucun framework ou bibliothèque ne sont utilisés. 
 
 ## **OhMyFood**
 
